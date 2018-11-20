@@ -43,6 +43,8 @@ class Text extends Component {
                 x:503,
                 y:450
             }}
+
+            
             enter={{
                 opacity:[1],
                 x:[273],
