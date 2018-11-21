@@ -1,23 +1,24 @@
 
 import React, { Component } from 'react';
 import { firebaseMatches } from '../../../firebase';
+import { firebaseLooper, reverseArray } from '../../ui/misc';
 
 class Blocks extends Component {
 
-    // constructor() {
-    //     super();
-    //     this.showMatches = this.showMatches.bind(this);
-    // }
-    
+     
     state = { 
         matches: []
      }
 
-    // componentDidMount () {
-    //     firebaseMatches.limitToLast(6).once('value').then((snapshot) => {
-    //         console.log(snapshot.val());
-    //     })
-    // }
+    componentDidMount () {
+        firebaseMatches.limitToLast(6).once('value').then((snapshot) => {
+            const matches = firebaseLooper(snapshot);
+
+            this.setState({
+                matches: reverseArray(matches)
+            })
+        })
+    }
 
     showMatches = () => {
        return(
