@@ -1,30 +1,40 @@
-
 import React, { Component } from 'react';
 import { firebaseMatches } from '../../../firebase';
 import { firebaseLooper, reverseArray } from '../../ui/misc';
 
+import MatchesBlock from '../../ui/matches_block';
+import Slide from 'react-reveal/Slide'
+
 class Blocks extends Component {
 
-     
-    state = { 
-        matches: []
-     }
+    state = {
+        matches:[]
+    }
 
-    componentDidMount () {
-        firebaseMatches.limitToLast(6).once('value').then((snapshot) => {
+    componentDidMount(){
+        firebaseMatches.limitToLast(6).once('value').then((snapshot)=>{
             const matches = firebaseLooper(snapshot);
 
             this.setState({
                 matches: reverseArray(matches)
-            })
+            });
         })
     }
 
-    showMatches = () => {
-       return(
-           <div> Matches </div>
-       )
-    }
+
+    showMatches = (matches) => (
+        matches ?
+            matches.map((match)=>(
+                <Slide bottom key={match.id}>
+                    <div className="item">
+                        <div className="wrapper">
+                            <MatchesBlock match={match}/>
+                        </div>
+                    </div>
+                </Slide>
+            ))
+        :null
+    )
 
 
     render() {
@@ -35,7 +45,6 @@ class Blocks extends Component {
             </div>
         );
     }
-
 }
- 
+
 export default Blocks;
