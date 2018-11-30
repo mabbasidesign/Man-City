@@ -30,6 +30,10 @@ class Enroll extends Component {
 
     }
 
+    upfateForm = (element) => {
+        console.log(element);
+    }
+
 
     render() { 
         return ( 
@@ -43,6 +47,7 @@ class Enroll extends Component {
                             <FormField
                             id={'email'}
                             formdata={this.state.formdata.email}
+                            change={(element) => this.upfateForm(element)}
                             />
                         </div>
                     </form>
