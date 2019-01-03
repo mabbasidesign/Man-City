@@ -41,7 +41,7 @@ export const firebaseLooper = (snapshot) => {
 export const reverseArray = (actualArray) => {
     let reverseArray = [];
 
-    for(let i=actualArray.length - 1; i > 0; i--){
+    for(let i = actualArray.length - 1; i > 0; i--){
         reverseArray.push(actualArray[i]);
     }
     return reverseArray;

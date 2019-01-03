@@ -20,11 +20,16 @@ class MeetPlayers extends Component {
                 <div className="home_meetplayers" style={{ background:`#ffffff url(${Stripes})`}}  >
                 <div className='container'>
                     <div className="home_meetplayers_wrapper">
+
+
                         <div className='home_card_wrapper'>
                             <HomeCards
                             show={this.state.show}
                             />
                         </div>
+
+
+
                         <div className="home_text_wrapper">
 
                             <div>
