@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { element } from 'prop-types';
 
 export const Tag = (props) => {
     const template = <div
@@ -45,4 +46,30 @@ export const reverseArray = (actualArray) => {
         reverseArray.push(actualArray[i]);
     }
     return reverseArray;
+}
+
+
+// export const validate = (element) => {
+//     let error = [true, ''];
+
+//     if(element.validation.required){
+//         const valid = element.value.trim() !== '';
+//         const message = `${!valid? 'This field is required' : '' }`;
+//         error = !valid? [valid, message]: error ;
+//     }
+
+//     return error;
+// }
+
+
+export const validate = (element) => {
+    let error = [true,''];
+
+    if(element.validation.required){
+        const valid = element.value.trim() !== '';
+        const message = `${!valid ? 'This field is required':''}`;
+        error = !valid ? [valid,message]: error;
+    }
+
+    return error;
 }
