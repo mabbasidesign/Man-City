@@ -3,6 +3,18 @@ import React, { Component } from 'react';
 const FormField = ({formdata, id, change}) => {
 
 
+    const showError = () => {
+        let errorMessage =<div className='error_label'>
+            {
+                formdata.validation && !formdata.valid ?
+                formdata.validationMessage:
+                null
+            }
+        </div>
+
+        return errorMessage;
+    }
+
     // const renderTemplate = () => {
     //     let formTemplate = null;
 
@@ -11,9 +23,9 @@ const FormField = ({formdata, id, change}) => {
     //             formTemplate = (
     //                 <div>
     //                     <input 
-    //                         {...formdata.config}
-    //                         value={formdata.value}
-    //                         onChange={(event) => change(event, id) }
+    //                     {...formdata.config}
+    //                     value={formdata.value}
+    //                     onChange={(event) => change({event, id}) }
     //                     />
     //                 </div>
     //             )
@@ -23,6 +35,7 @@ const FormField = ({formdata, id, change}) => {
     //     }
     //     return formTemplate;
     // }
+
 
     const renderTemplate = () => {
         let formTemplate = null;
@@ -36,6 +49,7 @@ const FormField = ({formdata, id, change}) => {
                         value={formdata.value}
                         onChange={(event) => change({event, id}) }
                         />
+                        {showError()}
                     </div>
                 )
             break;

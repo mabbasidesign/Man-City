@@ -26,66 +26,43 @@ class Enroll extends Component {
         }
     }
 
-
-    submitForm = () => {
-
-    }
-
-
-    // updateForm = (element) => {
-    //     console.log(element);
-    //     const newFormData = {...this.state.formdata}
-    //     const newElement = {...newFormData[element.id]}
-
-    //     newElement.value = element.event.target.value;
-    //     newFormData[element.id] = newElement;
-
-    //     state: element.target.id = event.target.value;
-    //     state: e.target.id = e.target.value;
-
-    //     this.setState = ({
-    //         formdata: newFormData
-    //     })
-    // }
-
-
-    // updateForm = (element) => {
-    //     const newFormData = {...this.state.formdata}
-    //     const newElement = {...newFormData[element.id]}
-
-    //     newElement.value = element.event.target.value;
-    //     newFormData[element.id] = newElement;
-
-    //      this.setState = ({
-    //         formdata: newFormData
-    //     })
-    // }
-
-
     updateForm(element){
         const newFormdata = {...this.state.formdata}
         const newElement = { ...newFormdata[element.id]}
 
         let valiDate = validate(newElement);
-        // console.log(valiDate);
-        //validation
         newElement.valiid = validate[0];
         newElement.validationMessage = valiDate[1];
 
         newElement.value = element.event.target.value;
         newFormdata[element.id] = newElement;
 
-        console.log(newFormdata);
-
         this.setState({
+            formError: false,
             formdata: newFormdata
         })
     }
 
-    // updateForm = (element) =>{
-    //     console.log(element);
-    // }
 
+    submitForm = (event) => {
+        event.preventDefault();
+
+        let dataToSubmit = {};
+        let formIsValid = true;
+
+        for(let key in this.state.formdata){
+            dataToSubmit[key] = this.state.formdata[key].value;
+            formIsValid = this.state.formdata[key].value && formIsValid;
+        }
+        if(formIsValid){
+            console.log(dataToSubmit);
+        }
+        else{
+            this.setState({
+                formError: true,
+            })
+        }
+    }
 
     render() { 
         return ( 
@@ -99,9 +76,11 @@ class Enroll extends Component {
                             <FormField
                             id={'email'}
                             formdata={this.state.formdata.email}
-                            // change={(element) => this.updateForm(element)}
                             change={(element) => this.updateForm(element)}
                             />
+                            {this.state.formError? <div className='error_label'>
+                                Something is wrong try again. </div>: null }
+                            <button onClick={(event) => this.submitForm(event)}>Submit</button>
                         </div>
                     </form>
                 </div>
