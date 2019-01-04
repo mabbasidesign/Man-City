@@ -3,24 +3,24 @@ import Fade from 'react-reveal';
 import FormField from '../../ui/formFields';
 
 class Enroll extends Component {
-    state = { 
-        formErrror: false,
-        formSuccess: '',
-        formdata: {
-            email: {
-                element: 'input',
-                value: '',
+    state = {
+        formError:false,
+        formSuccess:'',
+        formdata:{
+            email:{
+                element:'input',
+                value:'',
                 config:{
-                    name: 'email-input',
+                    name:'email_input',
                     type: 'email',
-                    placeholder: 'Enter Your email'
+                    placeholder: 'Enter your email'
                 },
                 validation:{
                     required: true,
                     email: true
                 },
                 valid: false,
-                validationMessage: ''
+                validationMessage:''
             }
         }
     }
@@ -30,16 +30,60 @@ class Enroll extends Component {
 
     }
 
-    upfateForm = (element) => {
-        console.log(element);
+
+    // updateForm = (element) => {
+    //     console.log(element);
+    //     const newFormData = {...this.state.formdata}
+    //     const newElement = {...newFormData[element.id]}
+
+    //     newElement.value = element.event.target.value;
+    //     newFormData[element.id] = newElement;
+
+    //     state: element.target.id = event.target.value;
+    //     state: e.target.id = e.target.value;
+
+    //     this.setState = ({
+    //         formdata: newFormData
+    //     })
+    // }
+
+
+    // updateForm = (element) => {
+    //     const newFormData = {...this.state.formdata}
+    //     const newElement = {...newFormData[element.id]}
+
+    //     newElement.value = element.event.target.value;
+    //     newFormData[element.id] = newElement;
+
+    //      this.setState = ({
+    //         formdata: newFormData
+    //     })
+    // }
+
+
+    updateForm(element){
+        const newFormdata = {...this.state.formdata}
+        const newElement = { ...newFormdata[element.id]}
+
+        newElement.value = element.event.target.value;
+
+        newFormdata[element.id] = newElement;
+
+        this.setState({
+            formdata: newFormdata
+        })
     }
+
+    // updateForm = (element) =>{
+    //     console.log(element);
+    // }
 
 
     render() { 
         return ( 
             <Fade>
                 <div className='enroll_wrapper'>
-                    <form onSubmit={ (event) => this.submitForm(event) }>
+                    <form onSubmit={(event) => this.submitForm(event)}>
                         <div className='enroll_title'>
                             Enter your email
                         </div>
@@ -47,7 +91,8 @@ class Enroll extends Component {
                             <FormField
                             id={'email'}
                             formdata={this.state.formdata.email}
-                            change={(element) => this.upfateForm(element)}
+                            // change={(element) => this.updateForm(element)}
+                            change={(element) => this.updateForm(element)}
                             />
                         </div>
                     </form>
