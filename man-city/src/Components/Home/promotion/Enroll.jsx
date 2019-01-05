@@ -104,23 +104,31 @@ class Enroll extends Component {
             <Fade>
                 <div className='enroll_wrapper'>
                     <form onSubmit={(event) => this.submitForm(event)}>
+
                         <div className='enroll_title'>
                             Enter your email
                         </div>
+
                         <div className='enroll_input'>
+                        
                             <FormField
-                            id={'email'}
-                            formdata={this.state.formdata.email}
-                            change={(element) => this.updateForm(element)}
+                                id={'email'}
+                                formdata={this.state.formdata.email}
+                                change={(element) => this.updateForm(element)}
                             />
-                            {this.state.formError? <div className='error_label'>
-                                Something is wrong try again. </div>: null }
-                                <div className="success_label">{this.state.formSuccess}</div>
+
+                            {this.state.formError? <div className='error_label'>Something is wrong try again. </div>: null }
+
+                            <div className="success_label">{this.state.formSuccess}</div>
+
                             <button onClick={(event) => this.submitForm(event)}>Submit</button>
+
                             <div className="enroll_discl">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             </div>
+
                         </div>
+                        
                     </form>
                 </div>
             </Fade>
