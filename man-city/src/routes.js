@@ -3,7 +3,8 @@ import Layout from './Hoc/Layout';
 import { Switch, Route } from 'react-router-dom';
 
 import Home from './Components/Home';
-import SignIn from '../src/Components/Home/signIn/Index';
+import SignIn from '../src/Components/signIn/Index';
+import admin from '../src/Components/admin/dashboard';
 
 
 const Routes = () =>{
@@ -11,6 +12,7 @@ const Routes = () =>{
     <div>
       <Layout>
         <Switch>
+            <Route exact component={admin} path="/dashboard" />
             <Route exact component={SignIn} path="/sign_in" />
             <Route exact component={Home} path="/" />
         </Switch>

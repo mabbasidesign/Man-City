@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import FormField from '../../ui/formFields';
-import { validate } from '../../ui/misc';
-import {firebase} from '../../../firebase';
+import FormField from '../ui/formFields';
+import { validate } from '../ui/misc';
+import {firebase} from '../../firebase';
 
 class SignIn extends Component {
 
@@ -77,6 +77,7 @@ class SignIn extends Component {
                 dataToSubmit.password
             ).then(() => {
                 console.log('user is auth')
+                this.props.history.push('/dashboard')
             }).catch(error =>{
                 this.setState({
                     formError: true
