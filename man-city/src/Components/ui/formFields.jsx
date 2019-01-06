@@ -51,15 +51,74 @@ const FormField = ({formdata, id, change}) => {
                             :null
                         }
                         <input 
-                        {...formdata.config}
-                        value={formdata.value}
-                        onChange={(event) => change({event, id}) }
+                            {...formdata.config}
+                            value={formdata.value}
+                            onChange={(event) => change({event, id}) }
                         />
                         {showError()}
                     </div>
                 )
             break;
+
+
+            case('select'):
+            formTemplate = (
+                    <div>
+                        { formdata.showlabel ?
+                            <div className="label_input">
+                                {formdata.config.label}
+                            </div>
+                            :null
+                        }
+                        <select
+                            value={formdata.value}
+                            onChange={(event) => change({event, id})}
+                        >
+                        <option value="">Select one</option>
+                        {
+                            formdata.config.options.map((item) => (
+                                <option key={item.key} value={item.value}>
+                                    {item.value}
+                                </option>
+                            ))
+                        }
+                        </select>
+                        { showError() }
+                    </div>
+                )
+            break;
+
+
+            // case('select'):
+            //     formTemplate = (
+            //         <div>
+            //             { formdata.showlabel ?
+            //                 <div className="label_input">
+            //                     {formdata.config.label}
+            //                 </div>
+            //                 :null
+            //             }
+            //             <select
+            //                 value={formdata.value}
+            //                 onChange={(event) => change({event, id}) }
+            //             >
+            //             <option value="">Select one</option>
+            //                 {
+            //                     formdata.config.option.map((item) => (
+            //                         <option key={item.key} value={item.key} >
+            //                             {item.value}
+            //                         </option>
+            //                     ))
+            //                 }
+            //             </select>
+            //         </div>
+            //     )
+            // break;
+
+
             default:
+
+
                 formTemplate = null;
 
         }
