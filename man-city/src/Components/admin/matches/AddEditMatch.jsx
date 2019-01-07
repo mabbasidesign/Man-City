@@ -202,21 +202,18 @@ class AddEditMatch extends Component {
                     })
                 });
                 this.updateFields(match, teamOptions, teams, type, matchId)
-
-                console.log(teamOptions);
-
+                // console.log(teamOptions);
             })
         }
 
         if(!matchId){
-            //Add match
+            getTeams(false, "Add Match");
         }
         else{
             firebaseDB.ref(`matches/${matchId}`).once('value')
             .then((snapshot) => {
                 const match = snapshot.val();
-                getTeams(match, "Edit Match")
-                
+                getTeams(match, "Edit Match");
                 // console.log("match", match);
             })
         }
