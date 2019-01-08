@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 const FormField = ({formdata, id, change}) => {
 
-
     const showError = () => {
         let errorMessage =<div className='error_label'>
             {
@@ -11,31 +10,8 @@ const FormField = ({formdata, id, change}) => {
                 null
             }
         </div>
-
         return errorMessage;
     }
-
-    // const renderTemplate = () => {
-    //     let formTemplate = null;
-
-    //     switch(formdata.element){
-    //         case('input'):
-    //             formTemplate = (
-    //                 <div>
-    //                     <input 
-    //                     {...formdata.config}
-    //                     value={formdata.value}
-    //                     onChange={(event) => change({event, id}) }
-    //                     />
-    //                 </div>
-    //             )
-    //         break;
-    //         default:
-    //             formTemplate = null;
-    //     }
-    //     return formTemplate;
-    // }
-
 
     const renderTemplate = () => {
         let formTemplate = null;
@@ -59,8 +35,6 @@ const FormField = ({formdata, id, change}) => {
                     </div>
                 )
             break;
-
-
             case('select'):
             formTemplate = (
                     <div>
@@ -88,44 +62,11 @@ const FormField = ({formdata, id, change}) => {
                 )
             break;
 
-
-            // case('select'):
-            //     formTemplate = (
-            //         <div>
-            //             { formdata.showlabel ?
-            //                 <div className="label_input">
-            //                     {formdata.config.label}
-            //                 </div>
-            //                 :null
-            //             }
-            //             <select
-            //                 value={formdata.value}
-            //                 onChange={(event) => change({event, id}) }
-            //             >
-            //             <option value="">Select one</option>
-            //                 {
-            //                     formdata.config.option.map((item) => (
-            //                         <option key={item.key} value={item.key} >
-            //                             {item.value}
-            //                         </option>
-            //                     ))
-            //                 }
-            //             </select>
-            //         </div>
-            //     )
-            // break;
-
-
             default:
-
-
                 formTemplate = null;
-
         }
         return formTemplate;
     }
-
-
     return ( 
         <div>
             {renderTemplate()}

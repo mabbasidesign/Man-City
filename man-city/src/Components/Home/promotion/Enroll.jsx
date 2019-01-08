@@ -79,11 +79,8 @@ class Enroll extends Component {
             formIsValid = this.state.formdata[key].value && formIsValid;
         }
         if(formIsValid){
-            // console.log(dataToSubmit);
-            // this.resetFormSuccess();
             firebasePromotions.orderByChild("email").equalTo(dataToSubmit.email).once("value")
             .then((snapshot)=> {
-                // console.log(snapshot.val())
                 if(snapshot.val() === null){
                     firebasePromotions.push(dataToSubmit);
                     this.resetFormSuccess(true);
@@ -120,11 +117,12 @@ class Enroll extends Component {
                             {this.state.formError? <div className='error_label'>Something is wrong try again. </div>: null }
 
                             <div className="success_label">{this.state.formSuccess}</div>
-
+                            
                             <button onClick={(event) => this.submitForm(event)}>Submit</button>
 
                             <div className="enroll_discl">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua.
                             </div>
 
                         </div>
