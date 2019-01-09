@@ -194,12 +194,14 @@ class AddEditMatch extends Component {
             firebaseTeams.once('value').then((snapshot) => {
                 const teams = firebaseLooper(snapshot);
                 const teamOptions = [];
+                // console.log(teams);
 
                 snapshot.forEach((childSnapshot) => {
                     teamOptions.push({
                         key: childSnapshot.val().shortName,
-                        value: childSnapshot.val().shortName
+                        value: childSnapshot.val().shortName,
                     })
+                    // console.log(teamOptions)
                 });
                 this.updateFields(match, teamOptions, teams, type, matchId)
                 // console.log(teamOptions);

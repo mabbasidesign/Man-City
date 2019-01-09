@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import AdminLayout from '../../../Hoc/AdminLayout';
-import {firebaseMatches} from '../../../firebase';
+
+import {firebasePlayers} from '../../../firebase';
 import {firebaseLooper, reverseArray} from '../../ui/misc';
 
 import Table from '@material-ui/core/Table';
@@ -12,27 +13,28 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper'
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-
-class AdminMatches extends Component {
+class AdinPlayers extends Component {
 
     state = { 
         isLoading: true,
-        matches: []
+        players: []
     }
 
     componentDidMount = () => {
-        firebaseMatches.once('value').then( snapshot => {
-            const matches = firebaseLooper(snapshot);
+        firebasePlayers.once('value').then((snapshot) => {
+            const players = firebaseLooper(snapshot);
 
-            this.setState({
-                matches: reverseArray(matches),
-                isLoading: false
-            })
+        this.setState({
+            isLoading: false,
+            players: reverseArray(players)
         })
+    })
     }
 
     render() {
-        return ( 
+        // console.log(this.state);
+        return (
+            
             <AdminLayout>
                 <div>
 
@@ -40,7 +42,7 @@ class AdminMatches extends Component {
                         <Table>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>Date</TableCell>
+                                    <TableCell>First Name</TableCell>
                                     <TableCell>Match</TableCell>
                                     <TableCell>Result</TableCell>
                                     <TableCell>Final</TableCell>
@@ -48,26 +50,24 @@ class AdminMatches extends Component {
                             </TableHead>
                             <TableBody>
                                 {
-                                    this.state.matches ?
-                                    this.state.matches.map((match,id) => (
+                                    this.state.players ?
+                                    this.state.players.map((player, id) => (
                                         <TableRow key={id} >
                                             <TableCell>
-                                                {match.date}
-                                            </TableCell>
-                                            <TableCell>
-                                                <Link to={`/admin_matches/edit_match/${match.id}`}>
-                                                    {match.away} <strong>-</strong> {match.local}
+                                                <Link to={`/admin_players/add_players/${player.id}`}>
+                                                    {player.name}
                                                 </Link>
                                             </TableCell>
                                             <TableCell>
-                                                {match.resultAway} <strong>-</strong> {match.resultLocal}
+                                                <Link to={`/admin_players/add_players/${player.id}`}>
+                                                    {player.lastname}
+                                                </Link>
                                             </TableCell>
                                             <TableCell>
-                                                { match.final === 'Yes'?
-                                                    <strong className="matches_tag_red">Final</strong>
-                                                    :
-                                                    <strong className="matches_tag_green">Not played yet</strong>
-                                                }
+                                                {player.number}
+                                            </TableCell>
+                                            <TableCell>
+                                                {player.position}
                                             </TableCell>
                                         </TableRow>
                                     )):
@@ -87,8 +87,9 @@ class AdminMatches extends Component {
 
                 </div>
             </AdminLayout>
+            
          );
     }
 }
  
-export default AdminMatches;
+export default AdinPlayers;
