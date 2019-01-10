@@ -22,15 +22,35 @@ class Fileuploader extends Component {
     }
 
     handleUploadStart = () => {
-
+        this.setState({ isUploading: true })
     }
 
     handleUploadError = () => {
-
+        this.setState({ isUploading: false })
     }
 
-    handleUploadSuccess = () => {
+    handleUploadSuccess = (filename) => {
+        this.setState({
+            name: filename,
+            isUploading: false
+        })
+        console.log(filename)
 
+        firebase.storage().ref(this.props.dir)
+        .child(filename).getDownloadURL()
+        .then(url => {
+            this.setState({ fileURL: url })
+            console.log(url)
+        })
+        this.props.filename(filename)
+    }
+
+    uploadAgain = () => {
+        this.setState({
+            name:'',
+            isUploading:false,
+            fileURL:''
+        })
     }
 
     render() { 
@@ -42,8 +62,8 @@ class Fileuploader extends Component {
                         <FileUploader
                             accept="image/*"
                             name="image"
-                            randomizaFilename
-                            // storageRef={firebase.storage().ref(this.props.dir)}
+                            randomizeFilename
+                            storageRef={firebase.storage().ref(this.props.dir)}
                             onUploadStart={this.handleUploadStart}
                             onUploadError={this.handleUploadError}
                             onUploadSuccess={this.handleUploadSuccess}
@@ -51,6 +71,28 @@ class Fileuploader extends Component {
                             
                     </div>
                     : null
+                }
+                {this.state.isUploading?
+                    <div tyle={{textAlighn:'center', margin:"30px 0"}} className='progress'>
+                        <CircularProgress
+                            style={{color:'#98c6e9'}}
+                            thickness={7}
+                        />
+                    </div>
+                    : null
+                }
+                {this.state.fileURL?
+                    <div className='image_upload_container'>
+                        <img
+                            style={{width: '100%'}}
+                            src={this.state.fileURL}
+                            alt={this.state.name}
+                        />
+                        <button style={{cursor: 'pointer'}} className='remove' onClick={() => this.uploadAgain()} >
+                            Remove
+                        </button>
+                    </div>
+                    :null
                 }
             </div>
          );
