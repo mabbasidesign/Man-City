@@ -14,9 +14,11 @@ const MatchesHome = () => {
                 >
                     Matches
                 </Tag>
-                matches
+                
 
                     <Blocks/>
+
+
 
                 <Tag
                     bck="#ffffff"
